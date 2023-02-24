@@ -1,0 +1,113 @@
+{% load static %}
+
+<style>
+  .hellomsg {
+    color:snow;
+  }
+  .profile-pic{
+		position: relative; 
+		width: 25px; 
+		height: 25px; 
+		overflow: hidden; 
+		border-radius: 50%;
+	}
+	.profile-pic img { 
+		width: 100%; 
+		height: auto; 
+	}
+  .dropbtn {
+    background-color: #798882;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown .dropbtn {
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: rgb(239, 238, 245);
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: rgb(67, 71, 73);
+  }
+  
+  .dropdown-content {
+    display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  }
+  
+ .dropdown-content a:hover {
+    background-color: rgba(114, 126, 144, 0.521);
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  } 
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+ 
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      {% if request.user.is_staff %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'home' %}">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'products' %}">Products</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+  
+  <span class="hellomsg">
+    Hello, {{request.user}}
+  </span>
+  <span>
+    <img class="profile-pic" src="{{request.user.customer.profile_pic.url}}" >
+  </span>
+
+<span>
+
+  <div class="dropdown" style="float:right;">
+    <button class="dropbtn">
+      <i class="fa fa-gear"></i>
+    </button>
+    <div class="dropdown-content">
+      <a class="nav-link" href="{% url 'settings' %}">Profile</a>
+      <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+    </div>
+  </div> 
+</span>
+
+</nav>
